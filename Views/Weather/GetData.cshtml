@@ -1,0 +1,32 @@
+﻿@model IEnumerable<weatherApp.Models.WeatherDetail>
+
+@{
+    ViewBag.Title = "GetData";
+
+}
+
+<h2 style="text-align:center">Weather App</h2>
+
+
+
+
+<div class="top-container">
+@foreach (var item in Model) {
+
+    <div class=" card-container">
+        <div class="row header-text-wrap">
+            <div class="col-lg-6">
+                @item.Name
+            </div>
+            <div class="col-lg-6 temp-text">
+                @item.Main.Temp
+            </div>
+        </div>
+        <div class="bottom-bar"></div>
+
+    </div>
+    
+}
+    </div>
+
+

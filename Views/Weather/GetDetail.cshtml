@@ -8,74 +8,77 @@
 
     @if(Model is null)
             {
-                <button class="btn-default btn-lg" onclick="window.location.href ='@Url.Action("GetData", "Weather")'">Go To Home</button>
+                <button class="btn-primary btn-lg" onclick="window.location.href ='@Url.Action("GetData", "Weather")'">Go To Home</button>
             }  
     else { 
-        <div class=" card-container detail-card-container">
-            <div class=" header-text-wrap detail-header-text-wrap">
-                <div class="" style="text-align:center">
-                    @Model.Name,@Model.Sys.Country
-                    <div class="datetime-container detail-datetime-container">
-                        @Model.LastUpdatedTime
+<div class=" card-container detail-card-container">
+    <button onclick="window.location.href ='@Url.Action("GetData", "Weather")'">
+        <i class="fa-solid fa-arrow-left icon" style="color: #000000;"></i>
+    </button>
+    <div class=" header-text-wrap detail-header-text-wrap">
+        <div class="" style="text-align:center">
+            @Model.Name,@Model.Sys.Country
+            <div class="datetime-container detail-datetime-container">
+                @Model.LastUpdatedTime
 
-                    </div>
-                </div>
-                
             </div>
-            <div class="detail-weather-container">
-                <div class="detail-cloud">
-                    <div class="detail-cloud-item">
-                        <img src="~/Content/Images/cloud2.png" />
-                    </div>
-                    <div class="detail-cloud-item">
-                        @Model.Weather[0].Description
+        </div>
 
-                    </div>
-                </div>
-                <div class="vertical-line"></div>
-                
-
-                <div class="detail-temp-wrapper col-lg-6">
-                    <div class="detail-temp-lg">
-                        @(Model.Main.Temp)°c
-
-                    </div>
-                    <div class="col-lg-6" style="display: flex; flex-direction: column; align-items: flex-start; width: auto;">
-                        <div style="flex:1">
-                            Temp Min: @Model.Main.Temp_min°C
-                        </div>
-                        <div style="flex:1">
-                            Temp Max: @Model.Main.Temp_max°C
-                        </div>
-
-                    </div>
-                </div>
+    </div>
+    <div class="detail-weather-container">
+        <div class="detail-cloud">
+            <div class="detail-cloud-item">
+                <img src="~/Content/Images/cloud2.png" />
             </div>
-            <div class="bottom-bar detail-bottom-bar">
-                <div class="wind-details-container">
-                    <p>Pressure: @(Model.Main.Pressure)hPa </p>
-                    <p>Humidity: @Model.Main.Humidity% </p>
-                    <p>Visibility: @(Model.Visibility)km </p>
+            <div class="detail-cloud-item">
+                <b> @Model.Weather[0].Description</b>
+
+            </div>
+        </div>
+        <div class="vertical-line"></div>
 
 
+        <div class="detail-temp-wrapper col-lg-6">
+            <div class="detail-temp-lg">
+                @(Model.Main.Temp)°c
+
+            </div>
+            <div class="col-lg-6" style="display: flex; flex-direction: column; align-items: flex-start; width: auto;">
+                <div style="flex:1">
+                    <b> Temp Min:</b> @Model.Main.Temp_min°C
                 </div>
-                <div class="vertical-line detail-bottombar-line1 "></div>
-                <div class="wind-direction-container" id="detail-speed">
-                    <img src="~/Content/Images/direction.png" style="height:2rem" />
-                    <p>@Model.Wind.Speed m/s @Model.Wind.Deg degree</p>
-
-                </div>
-                <div class="vertical-line detail-bottombar-line2"></div>
-
-                <div class="sun-detail-container">
-                    <p>Sun Rise: @Model.Sys.SunriseTime </p>
-                    <p>Sun Set: @Model.Sys.SunsetTime </p>
-
+                <div style="flex:1">
+                    <strong>Temp Max:</strong>   @Model.Main.Temp_max°C
                 </div>
 
             </div>
+        </div>
+    </div>
+    <div class="bottom-bar detail-bottom-bar">
+        <div class="wind-details-container">
+            <p> <b>Pressure:</b> @(Model.Main.Pressure)hPa </p>
+            <p><b>Humidity:</b> @Model.Main.Humidity% </p>
+            <p><b>Visibility:</b> @(Model.Visibility)km </p>
+
 
         </div>
+        <div class="vertical-line detail-bottombar-line1 "></div>
+        <div class="wind-direction-container" id="detail-speed">
+            <img src="~/Content/Images/direction.png" style="height:2rem" />
+            <p>@Model.Wind.Speed m/s @Model.Wind.Deg degree</p>
+
+        </div>
+        <div class="vertical-line detail-bottombar-line2"></div>
+
+        <div class="sun-detail-container">
+            <p><b>Sun Rise:</b> @Model.Sys.SunriseTime </p>
+            <p><b>Sun Set:</b> @Model.Sys.SunsetTime </p>
+
+        </div>
+
+    </div>
+
+</div>
     }
 
     

@@ -124,23 +124,23 @@
             <div class="row description-wrap">
                 <div class="col-lg-6 description-wrap-div1" style="padding-left:4rem">
                     <img src="~/Content/Images/@(GetIcon(item.Weather[0].Description))" />
-                    @item.Weather[0].Description
+                  <b>  @item.Weather[0].Description</b>
                 </div>
                 <div class="col-lg-6" style="display: flex; flex-direction: column; align-items: flex-start;">
                     <div style="flex:1">
-                        Temp Min: @item.Main.Temp_min°C
+                       <b> Temp Min:</b> @item.Main.Temp_min°C
                     </div>
                     <div style="flex:1">
-                        Temp Max: @item.Main.Temp_max°C
+                       <b> Temp Max:</b> @item.Main.Temp_max°C
                     </div>
 
                 </div>
             </div>
             <div class="bottom-bar">
                 <div class="wind-details-container">
-                    <p>Pressure: @(item.Main.Pressure)hPa </p>
-                    <p>Humidity: @item.Main.Humidity% </p>
-                    <p>Visibility: @(item.Visibility)km </p>
+                    <p><b>Pressure:</b> @(item.Main.Pressure)hPa </p>
+                    <p><b>Humidity:</b> @item.Main.Humidity% </p>
+                    <p><b>Visibility:</b> @(item.Visibility)km </p>
 
 
                 </div>
@@ -153,8 +153,8 @@
                 <div class="vertical-line bottombar-line2"></div>
 
                 <div class="sun-detail-container">
-                    <p>Sun Rise: @item.Sys.SunriseTime </p>
-                    <p>Sun Set: @item.Sys.SunsetTime </p>
+                    <p><b>Sun Rise:</b> @item.Sys.SunriseTime </p>
+                    <p><b>Sun Set:</b> @item.Sys.SunsetTime </p>
 
                 </div>
 

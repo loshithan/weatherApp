@@ -1,13 +1,13 @@
 ﻿.card-container {
-    width: 44.25rem;
+    width: 47.25rem;
     background-image: url(../Images/cloud_bg.png);
     background-color: brown;
-    background-size: contain;
     background-repeat: no-repeat;
     background-position-y: 35px;
-    height: 24.6rem;
+    height: 27.6rem;
     border-radius: 1rem;
     position: relative;
+    transition: transform 0.3s ease; 
 }
 .top-container {
     display: grid;
@@ -23,14 +23,13 @@
     background-image: url('../Images/Header bg.png');
     background-repeat: no-repeat;
     background-color: #1f2128;
-    width: 100vw;
     height: 100vh;
     color: white;
     font-family: 'Open Sans';
 }
 .bottom-bar {
-    width: 44.25rem;
-    height: 8rem;
+    width:47.25rem;
+    height: 12rem;
     background-color: #383b47;
     position: absolute;
     bottom: 0;
@@ -38,7 +37,6 @@
     display: flex;
     flex-direction: row;
     color: white;
-
 }
 .header-text-wrap {
     font-family: 'Open Sans', sans-serif;
@@ -46,9 +44,11 @@
     font-size: 3rem;
     padding-top: 3rem;
     padding: 3rem 0rem 0rem 2rem;
+    font-weight:700;
 }
-.temp-text{
-    font-size:5rem;
+.temp-text {
+    font-size: 5rem;
+    font-weight: 700;
 }
 
 .description-wrap {
@@ -58,9 +58,9 @@
     padding: 0rem 1rem 1rem 3rem;
 }
 
-.wind-details-container{
-    flex:1;
-    padding:1rem;
+.wind-details-container {
+    flex: 1;
+    padding: 2.5rem;
 }
 
 .wind-direction-container {
@@ -71,26 +71,27 @@
 .sun-detail-container {
     flex: 1;
     font-size: 1.2rem;
-    padding-top: 1.3rem;
+    padding-top: 3.3rem;
 }
 
 .datetime-container{
     font-size: 1.2rem;
     padding-left: 4rem;
 }
-.wind-details-container p{
-    margin:0 0 0.1rem
+.wind-details-container p {
+    margin: 0 0 0.1rem;
+    font-size:14px;
 }
 .wind-direction-container img {
     height: 2rem;
-    left: 2rem;
+    left: 4rem;
     position: absolute;
-    top: 2rem;
+    top: 4rem;
 }
 
 .wind-direction-container p {
     position: absolute;
-    top: 4rem;
+    top: 6.5rem;
     font-size: 1.2rem;
 }
 
@@ -124,6 +125,8 @@
 .detail-card-container {
     width: 67.25rem;
     height: 41.6rem;
+    background-image: none !important;
+    background-color: #2a68a5 !important;
 }
 
 .detail-header-text-wrap {
@@ -168,12 +171,16 @@
 }
 footer {
     position: fixed;
-    height: 3rem;
+    height: 5rem;
     background-color: #2c2a2a;
     color: whitesmoke;
     bottom: 0;
-    width: inherit;
+    width: -webkit-fill-available;
     text-align: center;
+    /* top: 0; */
+    /* bottom: 0; */
+    text-align: -webkit-center;
+    padding: 2rem;
 }
 .vertical-line {
     position: absolute;
@@ -200,18 +207,31 @@ footer {
     margin-top: 2rem
 }
 .bottombar-line2 {
-    left: 64%;
+    left: 67%;
     margin-top: 0rem;
     bottom: 0;
-    top: 11px;
+    top: 23%;
     height: 6rem;
 }
 .bottombar-line1 {
-    left: 32%;
+    left: 36%;
     margin-top: 0rem;
     bottom: 0;
-    top: 11px;
-    height: 6rem;
+    top: 23%;
+    height: 6rem
 }
+b{
+    font-weight:600
+}
+.body-content {
+    padding-bottom: 10rem;
+}
+.card-container:hover {
+    
+    transform: scale(1.02); /* Enlarge the element by 10% */
+    transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
+
+
 
 

@@ -17,6 +17,7 @@
     <h2 style="text-align:center;color:white;flex:3">Weather App</h2>
 </div>
 
+<!--method returns color of card container according to weather description-->
 @functions{
     public string GetColor(string weather)
     {
@@ -57,6 +58,7 @@
 
         return color;
     }
+    //method returns imd file path according to weather description
 
     public string GetIcon(string weather)
     {
@@ -107,6 +109,7 @@
 
     @foreach (var item in Model)
     {
+        <!--add the returning color as class name to the div-->
 
         <div class=" card-container @(GetColor(item.Weather[0].Description)) " onclick="window.location.href ='@Url.Action("GetDetail", "Weather", new { code = item.Id })'">
             <div class="row header-text-wrap">
@@ -123,6 +126,8 @@
             </div>
             <div class="row description-wrap">
                 <div class="col-lg-6 description-wrap-div1" style="padding-left:4rem">
+
+                    <!--add the returning img file path to src attribute-->
                     <img src="~/Content/Images/@(GetIcon(item.Weather[0].Description))" />
                   <b>  @item.Weather[0].Description</b>
                 </div>

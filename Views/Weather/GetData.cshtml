@@ -1,32 +1,170 @@
 ﻿@model IEnumerable<weatherApp.Models.WeatherDetail>
 
+
 @{
     ViewBag.Title = "GetData";
 
+
 }
 
-<h2 style="text-align:center">Weather App</h2>
 
+
+<div style="display: inline-flex; width: 25rem; position: relative; left: 38%; ">
+    <div style=" flex: 1; padding: auto; position: relative;">
+        <img style="height: 4rem; position: absolute; top: 1rem;" src="~/Content/Images/cld_icon.png" />
+
+    </div>
+    <h2 style="text-align:center;color:white;flex:3">Weather App</h2>
+</div>
+
+@functions{
+    public string GetColor(string weather)
+    {
+        string color = "blue"; // Default color (you can set it to any color you prefer)
+
+        if (weather == "overcast clouds")
+        {
+            color = "orange";
+        }
+        else if (weather == "broken clouds")
+        {
+            color = "purple";
+        }
+        else if (weather == "clear sky")
+        {
+            color = "green";
+        }
+        else if (weather == "fog")
+        {
+            color = "grey";
+        }
+        else if (weather == "few clouds")
+        {
+            color = "blue";
+        }
+        else if (weather == "Light rain")
+        {
+            color = "yellow";
+        }
+        else if (weather == "mist")
+        {
+            color = "red";
+        }
+        else
+        {
+            color = "brown";
+        }
+
+        return color;
+    }
+
+    public string GetIcon(string weather)
+    {
+        string imgSrc = "few_clouds.png"; // Default image source
+
+        if (weather == "overcast clouds")
+        {
+            imgSrc = "clear_sky.png"; // Replace with the actual image source for 'orange'
+        }
+        else if (weather == "broken clouds")
+        {
+            imgSrc = "broken_cloud.png"; // Replace with the actual image source for 'orange'
+        }
+        else if (weather == "clear sky")
+        {
+            imgSrc = "clear_sky.png"; // Replace with the actual image source for 'orange'
+        }
+        else if (weather == "fog")
+        {
+            imgSrc = "mist.png"; // Replace with the actual image source for 'orange'
+        }
+        else if (weather == "few clouds")
+        {
+            imgSrc = "few_clouds.png"; // Replace with the actual image source for 'orange'
+        }
+        else if (weather == "Light rain")
+        {
+            imgSrc = "rain.png"; // Replace with the actual image source for 'orange'
+        }
+        else if (weather == "mist")
+        {
+            imgSrc = "mist.png"; // Replace with the actual image source for 'orange'
+        }
+        else
+        {
+            imgSrc = "few_clouds.png"; // Replace with the actual image source for 'orange'
+        }
+
+        return imgSrc;
+    }
+
+}
 
 
 
 <div class="top-container">
-@foreach (var item in Model) {
 
-    <div class=" card-container">
-        <div class="row header-text-wrap">
-            <div class="col-lg-6">
-                @item.Name
+
+    @foreach (var item in Model)
+    {
+
+        <div class=" card-container @(GetColor(item.Weather[0].Description)) " onclick="window.location.href ='@Url.Action("GetDetail", "Weather", new { code = item.Id })'">
+            <div class="row header-text-wrap">
+                <div class="col-lg-6">
+                    @item.Name,@item.Sys.Country
+                    <div class="datetime-container">
+                        @item.LastUpdatedTime
+
+                    </div>
+                </div>
+                <div class="col-lg-6 temp-text">
+                    @item.Main.Temp°c
+                </div>
             </div>
-            <div class="col-lg-6 temp-text">
-                @item.Main.Temp
+            <div class="row description-wrap">
+                <div class="col-lg-6 description-wrap-div1" style="padding-left:4rem">
+                    <img src="~/Content/Images/@(GetIcon(item.Weather[0].Description))" />
+                    @item.Weather[0].Description
+                </div>
+                <div class="col-lg-6" style="display: flex; flex-direction: column; align-items: flex-start;">
+                    <div style="flex:1">
+                        Temp Min: @item.Main.Temp_min°C
+                    </div>
+                    <div style="flex:1">
+                        Temp Max: @item.Main.Temp_max°C
+                    </div>
+
+                </div>
             </div>
+            <div class="bottom-bar">
+                <div class="wind-details-container">
+                    <p>Pressure: @(item.Main.Pressure)hPa </p>
+                    <p>Humidity: @item.Main.Humidity% </p>
+                    <p>Visibility: @(item.Visibility)km </p>
+
+
+                </div>
+                <div class="vertical-line bottombar-line1"></div>
+                <div class="wind-direction-container">
+                    <img src="~/Content/Images/direction.png" style="height:2rem" />
+                    <p>@item.Wind.Speed m/s @item.Wind.Deg degree</p>
+
+                </div>
+                <div class="vertical-line bottombar-line2"></div>
+
+                <div class="sun-detail-container">
+                    <p>Sun Rise: @item.Sys.SunriseTime </p>
+                    <p>Sun Set: @item.Sys.SunsetTime </p>
+
+                </div>
+
+            </div>
+
         </div>
-        <div class="bottom-bar"></div>
 
-    </div>
-    
-}
-    </div>
+    }
+</div>
+
+
 
 

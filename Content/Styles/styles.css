@@ -1,43 +1,217 @@
 ﻿.card-container {
-    width: 36.25rem;
+    width: 44.25rem;
     background-image: url(../Images/cloud_bg.png);
     background-color: brown;
     background-size: contain;
     background-repeat: no-repeat;
     background-position-y: 35px;
-    height: 22.6rem;
+    height: 24.6rem;
     border-radius: 1rem;
     position: relative;
 }
 .top-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-row-gap: 1rem;
+    grid-row-gap: 2rem;
     width: 88rem;
     margin: auto;
+    grid-column-gap: 3rem;
+    margin-top: 10rem;
 }
 
 .top-body {
     background-image: url('../Images/Header bg.png');
     background-repeat: no-repeat;
-    background-size:contain;
-    background-color:#1f2128;
+    background-color: #1f2128;
+    width: 100vw;
+    height: 100vh;
+    color: white;
+    font-family: 'Open Sans';
 }
 .bottom-bar {
-    width: 36.25rem;
+    width: 44.25rem;
     height: 8rem;
     background-color: #383b47;
     position: absolute;
     bottom: 0;
     border-radius: 0 0 1rem 1rem;
+    display: flex;
+    flex-direction: row;
+    color: white;
+
 }
 .header-text-wrap {
     font-family: 'Open Sans', sans-serif;
     color: white;
     font-size: 3rem;
     padding-top: 3rem;
-    padding: 3rem 0rem 1rem 2rem;
+    padding: 3rem 0rem 0rem 2rem;
 }
 .temp-text{
     font-size:5rem;
 }
+
+.description-wrap {
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    font-size: 1.2rem;
+    padding: 0rem 1rem 1rem 3rem;
+}
+
+.wind-details-container{
+    flex:1;
+    padding:1rem;
+}
+
+.wind-direction-container {
+    flex: 1;
+    position: relative;
+}
+
+.sun-detail-container {
+    flex: 1;
+    font-size: 1.2rem;
+    padding-top: 1.3rem;
+}
+
+.datetime-container{
+    font-size: 1.2rem;
+    padding-left: 4rem;
+}
+.wind-details-container p{
+    margin:0 0 0.1rem
+}
+.wind-direction-container img {
+    height: 2rem;
+    left: 2rem;
+    position: absolute;
+    top: 2rem;
+}
+
+.wind-direction-container p {
+    position: absolute;
+    top: 4rem;
+    font-size: 1.2rem;
+}
+
+.description-wrap-div1 {
+    padding-left: 4rem !important;
+}
+.blue {
+    background-color: #388ee7 !important;
+}
+.green {
+    background-color: #40b681 !important;
+}
+.purple {
+    background-color:#6249cc !important ;
+}
+.orange {
+    background-color: #de944e !important;
+}
+.red {
+    background-color: #9c3a3a !important;
+}
+
+.detail-top-container {
+    padding: 0rem 20rem 5rem 13rem;
+}
+.detail-bottom-bar {
+    width: 67.25rem;
+    height: 13rem;
+    padding:2rem;
+}
+.detail-card-container {
+    width: 67.25rem;
+    height: 41.6rem;
+}
+
+.detail-header-text-wrap {
+    padding: 3rem 0rem 0rem;
+}
+.detail-datetime-container{
+    padding:0rem
+}
+.detail-weather-container {
+    display: flex;
+    flex-direction: row;
+    padding-top: 3rem;
+}
+.detail-weather-container div{
+    flex:1;
+}
+.detail-temp-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.detail-description {
+    display: flex;
+    flex-direction: column;
+}
+.detail-cloud {
+    display: flex;
+    flex-direction: column;
+    padding-top: 3rem;
+    padding-right: 7rem;
+}
+.detail-cloud-item {
+    align-self: end;
+}
+.detail-temp-lg {
+    font-size: 5rem;
+}
+.detail-bottom-bar div{
+    align-self:center;
+}
+#detail-speed{
+    align-self:flex-start;
+}
+footer {
+    position: fixed;
+    height: 3rem;
+    background-color: #2c2a2a;
+    color: whitesmoke;
+    bottom: 0;
+    width: inherit;
+    text-align: center;
+}
+.vertical-line {
+    position: absolute;
+    left: 48%;
+    /* transform: translate(4px, 113px); */
+    top: 0px;
+    bottom: 0;
+    width: 1px;
+    background-color: #ccc;
+    /* height: 28rem; */
+    margin-top: 14rem;
+    height: 9rem;
+    flex: none;
+}
+.detail-bottombar-line1 {
+    
+    left: 30%;
+   
+    margin-top:2rem
+    
+}
+.detail-bottombar-line2 {
+    left: 62%;
+    margin-top: 2rem
+}
+.bottombar-line2 {
+    left: 64%;
+    margin-top: 0rem;
+    bottom: 0;
+    top: 11px;
+    height: 6rem;
+}
+.bottombar-line1 {
+    left: 32%;
+    margin-top: 0rem;
+    bottom: 0;
+    top: 11px;
+    height: 6rem;
+}
+
+

@@ -9,12 +9,16 @@
 
 
 
-<div style="display: inline-flex; width: 25rem; position: relative; left: 38%; ">
-    <div style=" flex: 1; padding: auto; position: relative;">
-        <img style="height: 4rem; position: absolute; top: 1rem;" src="~/Content/Images/cld_icon.png" />
+@*<div style="display: inline-flex; width: 25rem; position: relative; left: 38%; ">
+        <div style=" flex: 1; padding: auto; position: relative;">
+            <img style="height: 4rem; position: absolute; top: 1rem;" src="~/Content/Images/cld_icon.png" />
 
-    </div>
-    <h2 style="text-align:center;color:white;flex:3">Weather App</h2>
+        </div>
+        <h2 style="text-align:center;color:white;flex:3">Weather App</h2>
+    </div>*@
+<div class="d-flex flex-row justify-content-center mt-5">
+    <img src="~/Content/Images/cld_icon.png" style="height: 1.5rem;">
+    <p class="p-2"><b>Weather App</b></p>
 </div>
 
 <!--method returns color of card container according to weather description-->
@@ -104,71 +108,183 @@
 
 
 
-<div class="top-container">
+@*<div class="top-container row">
+
+*@
+<div class="container">
+
+    <div class="parent-container row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2  mx-auto ">
 
 
-    @foreach (var item in Model)
-    {
-        <!--add the returning color as class name to the div-->
 
-        <div class=" card-container @(GetColor(item.Weather[0].Description)) " onclick="window.location.href ='@Url.Action("GetDetail", "Weather", new { code = item.Id })'">
-            <div class="row header-text-wrap">
-                <div class="col-lg-6">
-                    @item.Name,@item.Sys.Country
-                    <div class="datetime-container">
-                        @item.LastUpdatedTime
+
+
+        @foreach (var item in Model)
+        {
+            <!--add the returning color as class name to the div-->
+
+            <!--<div class=" card-container col-md-6 @(GetColor(item.Weather[0].Description)) " onclick="window.location.href ='@Url.Action("GetDetail", "Weather", new { code = item.Id })'">
+                <div class="row header-text-wrap">
+                    <div class="col-lg-6">
+                        @item.Name,@item.Sys.Country
+                        <div class="datetime-container">
+                            @item.LastUpdatedTime
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6 temp-text">
+                        @item.Main.Temp°c
+                    </div>
+                </div>
+                <div class="row description-wrap">
+                    <div class="col-lg-6 description-wrap-div1" style="padding-left:4rem">-->
+
+            <!--add the returning img file path to src attribute-->
+            <!--<img src="~/Content/Images/@(GetIcon(item.Weather[0].Description))" />
+                      <b>  @item.Weather[0].Description</b>
+                    </div>
+                    <div class="col-lg-6" style="display: flex; flex-direction: column; align-items: flex-start;">
+                        <div style="flex:1">
+                           <b> Temp Min:</b> @item.Main.Temp_min°C
+                        </div>
+                        <div style="flex:1">
+                           <b> Temp Max:</b> @item.Main.Temp_max°C
+                        </div>
 
                     </div>
                 </div>
-                <div class="col-lg-6 temp-text">
-                    @item.Main.Temp°c
-                </div>
-            </div>
-            <div class="row description-wrap">
-                <div class="col-lg-6 description-wrap-div1" style="padding-left:4rem">
+                <div class="bottom-bar">
+                    <div class="wind-details-container">
+                        <p><b>Pressure:</b> @(item.Main.Pressure)hPa </p>
+                        <p><b>Humidity:</b> @item.Main.Humidity% </p>
+                        <p><b>Visibility:</b> @(item.Visibility)km </p>
 
-                    <!--add the returning img file path to src attribute-->
-                    <img src="~/Content/Images/@(GetIcon(item.Weather[0].Description))" />
-                  <b>  @item.Weather[0].Description</b>
-                </div>
-                <div class="col-lg-6" style="display: flex; flex-direction: column; align-items: flex-start;">
-                    <div style="flex:1">
-                       <b> Temp Min:</b> @item.Main.Temp_min°C
+
                     </div>
-                    <div style="flex:1">
-                       <b> Temp Max:</b> @item.Main.Temp_max°C
+                    <div class="vertical-line bottombar-line1"></div>
+                    <div class="wind-direction-container">
+                        <img src="~/Content/Images/direction.png" style="height:2rem" />
+                        <p>@item.Wind.Speed m/s @item.Wind.Deg degree</p>
+
+                    </div>
+                    <div class="vertical-line bottombar-line2"></div>
+
+                    <div class="sun-detail-container">
+                        <p><b>Sun Rise:</b> @item.Sys.SunriseTime </p>
+                        <p><b>Sun Set:</b> @item.Sys.SunsetTime </p>
+
                     </div>
 
                 </div>
+
+            </div>-->
+
+            <div class="col col-md-12 col-lg-6  p-3 ">
+                <div class=" card-container @(GetColor(item.Weather[0].Description))    px-0 d-flex flex-md-column flex-sm-column" onclick="window.location.href ='@Url.Action("GetDetail", "Weather", new { code = item.Id })'">
+                    <div class="d-flex flex-md-row  align-items-center  my-2 mx-3 mt-4  ">
+                        <div class="col ">
+                            <h2><b>
+    @item.Name,@item.Sys.Country
+</b></h2>
+                            <div class=" px-5">
+                                @item.LastUpdatedTime
+
+                            </div>
+                        </div>
+                        <div class="col temp-text mx-auto">
+                            @item.Main.Temp°c
+                        </div>
+                    </div>
+                    <div class="row my-2 mx-0 ">
+                        <div class="col">
+                            <div class="d-flex  align-item-center justify-content-center gap-3">
+                                <img src="~/Content/Images/@(GetIcon(item.Weather[0].Description))" />
+                                <p> <b>  @item.Weather[0].Description </b></p>
+
+                            </div>
+
+                            <!--add the returning img file path to src attribute-->
+
+                        </div>
+                        <div class="col ">
+                            <div class="d-flex flex-md-row flex-sm-row">
+                                <p> <b> Temp Min: </b> </p>
+                                <p> @item.Main.Temp_min°C</p>
+                            </div>
+                            <div class="d-flex flex-md-row flex-sm-row">
+                                <p> <b> Temp Max: </b> </p>
+                                <p>@item.Main.Temp_max°C</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="container bottom-bar mt-2 px-4 py-3">
+                        <div class="row align-items-end ">
+                            <div class="col p-1 ">
+
+                                <div class="d-flex flex-md-row flex-sm-row">
+                                    <p><b>Pressure: </b></p>
+                                    <p> @(item.Main.Pressure)Pa</p>
+
+                                </div>
+                                <div class="d-flex flex-md-row flex-sm-row">
+                                    <p><b>Humidity: </b> </p>
+                                    <p>@item.Main.Humidity%</p>
+
+                                </div>
+                                <div class="d-flex flex-md-row flex-sm-row">
+                                    <p><b>Visibility: </b> </p>
+                                    <p>@(item.Visibility)km</p>
+                                </div>
+
+
+                            </div>
+                            <div class="col justify-content-end d-flex flex-column flex-wrap align-items-center ">
+                                <div class="d-flex  align-items-center my-2">
+                                    <img src="~/Content/Images/direction.png" style="height:1rem" class="dir-img" />
+
+                                </div>
+                                <p>@item.Wind.Speed  m/s</p>
+                                <div class="d-flex flex-column flex-sm-row   degree-responsive">
+
+                                    <p>  @item.Wind.Deg &ThinSpace; </p>
+                                    <p>degree</p>
+                                </div>
+
+
+
+                            </div>
+                            <div class="col mt-auto">
+                                <div class="d-flex flex-md-row flex-sm-row">
+                                    <p><b>Sunrise: </b></p>
+                                    <p>
+                                        @item.Sys.SunriseTime
+                                    </p>
+                                </div>
+                                <div class="d-flex flex-md-row flex-sm-row">
+                                    <p><b>Sunset: </b></p>
+                                    <p> @item.Sys.SunsetTime</p>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
             </div>
-            <div class="bottom-bar">
-                <div class="wind-details-container">
-                    <p><b>Pressure:</b> @(item.Main.Pressure)hPa </p>
-                    <p><b>Humidity:</b> @item.Main.Humidity% </p>
-                    <p><b>Visibility:</b> @(item.Visibility)km </p>
 
 
-                </div>
-                <div class="vertical-line bottombar-line1"></div>
-                <div class="wind-direction-container">
-                    <img src="~/Content/Images/direction.png" style="height:2rem" />
-                    <p>@item.Wind.Speed m/s @item.Wind.Deg degree</p>
 
-                </div>
-                <div class="vertical-line bottombar-line2"></div>
-
-                <div class="sun-detail-container">
-                    <p><b>Sun Rise:</b> @item.Sys.SunriseTime </p>
-                    <p><b>Sun Set:</b> @item.Sys.SunsetTime </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    }
-</div>
+        }
+    </div>
+    </div>
 
 
 

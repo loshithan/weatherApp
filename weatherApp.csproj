@@ -210,6 +210,7 @@
     <Content Include="Content\Images\mist.png" />
     <Content Include="Content\Images\rain.png" />
     <Content Include="Content\Js\weather.js" />
+    <Content Include="Content\Styles\responsiveStyle.css" />
     <Content Include="Content\Styles\styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

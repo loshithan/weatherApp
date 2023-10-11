@@ -12,29 +12,33 @@ body {
     color: rgb(228, 225, 219) !important;
 }
 
-@media (max-width: 576px) {
+
+@media (max-width:450px) {
     p {
-        font-size: 12px;
+        font-size: 12px !important;
+        /* Adjust the font size for medium screens */
+    }
+}
+@media (max-width: 577px) {
+    p {
+        font-size: 14px;
         /* Adjust the font size for small screens */
     }
 
     .card-container {
         flex-direction: column;
     }
-    /* .parent-container{
-        flex-direction: column;
-        max-width: 375px;
-        margin-left: auto;
-        margin-right: auto;
-    } */
+    .temp-text {
+        font-size: 193% !important;
+    }
 
 
 }
 
 /* Medium screens (tablets) */
 @media (min-width: 577px) and (max-width: 992px) {
-    .responsive-text {
-        font-size: 20px;
+    p {
+        font-size: 14px;
         /* Adjust the font size for medium screens */
     }
     /* .parent-container{
@@ -49,13 +53,21 @@ body {
     } */
     .parent-container {
         flex-direction: column;
+        max-width: 516px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .detail-parent-container {
+        max-width: 516px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
 /* Large screens (desktops) */
 @media (min-width: 993px) {
-    .responsive-text {
-        font-size: 24px;
+    p {
+        font-size: 14px;
         /* Adjust the font size for large screens */
     }
     /* .card-container{
@@ -65,17 +77,22 @@ body {
     } */
 
 
-    /* .parent-container {
+    .parent-container {
         max-width: 950px;
-        
-    } */
+        margin-left: auto;
+        margin-right: auto;
+    }
 
-
+    .detail-parent-container {
+        max-width: 550px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 @media (min-width: 1200px) {
-    .responsive-text {
-        font-size: 24px;
+    p {
+        font-size: 17px !important;
         /* Adjust the font size for large screens */
     }
     /* .card-container{
@@ -86,25 +103,30 @@ body {
 
 
 
-    /* .parent-container {
-        max-width: 950px;
-       
-    } */
-
-
+    .parent-container {
+         max-width: 1040px;
+        
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .detail-parent-container {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 .temp-text {
-    font-size: 350%;
+    font-size: 250%;
     font-weight: 700;
 }
 
 p {
-    line-height: 50%;
+    line-height: 81%;
 }
 
 .card-container {
-    background-image: url('/img/cloud\ bg.png');
+    background-image: url('../Images/cloud_bg.png');
     background-color: red;
     background-repeat: no-repeat;
     border-radius: 1rem;
@@ -151,4 +173,10 @@ body{
 }
 footer {
     background-color: #2c2a2a;
+}
+
+.detail-parent-container {
+    max-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
 }

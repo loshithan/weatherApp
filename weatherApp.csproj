@@ -185,6 +185,10 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\WeatherController.cs" />
+    <Compile Include="DAL\ApiHelper.cs" />
+    <Compile Include="DAL\CacheServices.cs" />
+    <Compile Include="DAL\Constants.cs" />
+    <Compile Include="DAL\DataAccessLayer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

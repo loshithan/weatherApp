@@ -100,177 +100,122 @@
 *@
 <div class="container">
 
-    <div class="parent-container row row-cols-1 row-cols-md-1 row-cols-lg-1 row-cols-xl-1  mx-auto ">
+    <div class="detail-parent-container row   mx-auto ">
 
 
 
 
 
-       
-            <!--add the returning color as class name to the div-->
 
-            <!--<div class=" card-container col-md-6 @(GetColor(Model.Weather[0].Description)) " onclick="window.location.href ='@Url.Action("GetDetail", "Weather", new { code = Model.Id })'">
-                <div class="row header-text-wrap">
-                    <div class="col-lg-6">
-                        @Model.Name,@Model.Sys.Country
-                        <div class="datetime-container">
+        <div class="col col-md-12 col-lg-12  p-3 ">
+            <div class=" card-container @(GetColor(Model.Weather[0].Description))    px-0 d-flex flex-md-column flex-sm-column" onclick="window.location.href ='@Url.Action("GetDetail", "Weather", new { code = Model.Id })'">
+                <div class="d-flex flex-md-row justify-content-evenly   my-2 mx-3 mt-4  ">
+                    <div class=" d-flex flex-column  justify-content-end ">
+                        <h2>
+                            <b>
+                                @Model.Name,@Model.Sys.Country
+                            </b>
+                        </h2>
+                        <div class="mx-auto">
                             @Model.LastUpdatedTime
 
                         </div>
                     </div>
-                    <div class="col-lg-6 temp-text">
+                    <div class=" temp-text">
+
                         @Model.Main.Temp°c
-                    </div>
-                </div>
-                <div class="row description-wrap">
-                    <div class="col-lg-6 description-wrap-div1" style="padding-left:4rem">-->
 
-            <!--add the returning img file path to src attribute-->
-            <!--<img src="~/Content/Images/@(GetIcon(Model.Weather[0].Description))" />
-                      <b>  @Model.Weather[0].Description</b>
-                    </div>
-                    <div class="col-lg-6" style="display: flex; flex-direction: column; align-Models: flex-start;">
-                        <div style="flex:1">
-                           <b> Temp Min:</b> @Model.Main.Temp_min°C
-                        </div>
-                        <div style="flex:1">
-                           <b> Temp Max:</b> @Model.Main.Temp_max°C
-                        </div>
 
                     </div>
                 </div>
-                <div class="bottom-bar">
-                    <div class="wind-details-container">
-                        <p><b>Pressure:</b> @(Model.Main.Pressure)hPa </p>
-                        <p><b>Humidity:</b> @Model.Main.Humidity% </p>
-                        <p><b>Visibility:</b> @(Model.Visibility)km </p>
+                <div class="d-flex flex-md-row justify-content-evenly   my-2 mx-3 ">
+                    <div class="">
+                        <div class="d-flex  align-Model-center justify-content-center gap-3">
+                            <img src="~/Content/Images/@(GetIcon(Model.Weather[0].Description))" />
+                            <p> <b>  @Model.Weather[0].Description </b></p>
 
+                        </div>
 
-                    </div>
-                    <div class="vertical-line bottombar-line1"></div>
-                    <div class="wind-direction-container">
-                        <img src="~/Content/Images/direction.png" style="height:2rem" />
-                        <p>@Model.Wind.Speed m/s @Model.Wind.Deg degree</p>
+                        <!--add the returning img file path to src attribute-->
 
                     </div>
-                    <div class="vertical-line bottombar-line2"></div>
+                    <div class=" ">
+                        <div class="d-flex flex-md-row flex-sm-row">
+                            <p> <b> Temp Min: </b>  <p>  @Model.Main.Temp_min°C</p>
+                            </p>
 
-                    <div class="sun-detail-container">
-                        <p><b>Sun Rise:</b> @Model.Sys.SunriseTime </p>
-                        <p><b>Sun Set:</b> @Model.Sys.SunsetTime </p>
+                        </div>
+                        <div class="d-flex flex-md-row flex-sm-row">
+                            <p> <b> Temp Max: </b> </p>
+                            <p>@Model.Main.Temp_max°C</p>
+                        </div>
 
                     </div>
-
                 </div>
 
-            </div>-->
+                <div class="container bottom-bar mt-2 px-4 py-3">
+                    <div class="d-flex justify-content-evenly flex-row align-Models-end ">
+                        <div class=" p-1 ">
 
-            <div class="col col-md-12 col-lg-12  p-3 ">
-                <div class=" card-container @(GetColor(Model.Weather[0].Description))    px-0 d-flex flex-md-column flex-sm-column" onclick="window.location.href ='@Url.Action("GetDetail", "Weather", new { code = Model.Id })'">
-                    <div class="d-flex flex-md-row  align-Models-center  my-2 mx-3 mt-4  ">
-                        <div class="col ">
-                            <h2>
-                                <b>
-                                    @Model.Name,@Model.Sys.Country
-                                </b>
-                            </h2>
-                            <div class=" px-5">
-                                @Model.LastUpdatedTime
-
-                            </div>
-                        </div>
-                        <div class="col temp-text mx-auto">
-                            @Model.Main.Temp°c
-                        </div>
-                    </div>
-                    <div class="row my-2 mx-0 ">
-                        <div class="col">
-                            <div class="d-flex  align-Model-center justify-content-center gap-3">
-                                <img src="~/Content/Images/@(GetIcon(Model.Weather[0].Description))" />
-                                <p> <b>  @Model.Weather[0].Description </b></p>
-
-                            </div>
-
-                            <!--add the returning img file path to src attribute-->
-
-                        </div>
-                        <div class="col ">
                             <div class="d-flex flex-md-row flex-sm-row">
-                                <p> <b> Temp Min: </b> </p>
-                                <p> @Model.Main.Temp_min°C</p>
+                                <p><b>Pressure: </b></p>
+                                <p> @(Model.Main.Pressure)Pa</p>
+
                             </div>
                             <div class="d-flex flex-md-row flex-sm-row">
-                                <p> <b> Temp Max: </b> </p>
-                                <p>@Model.Main.Temp_max°C</p>
+                                <p><b>Humidity: </b> </p>
+                                <p>@Model.Main.Humidity%</p>
+
                             </div>
+                            <div class="d-flex flex-md-row flex-sm-row">
+                                <p><b>Visibility: </b> </p>
+                                <p>@(Model.Visibility)km</p>
+                            </div>
+
+
+                        </div>
+                        <div class="  my-auto d-flex flex-column flex-wrap align-Models-center ">
+                            <div class="d-flex  align-Models-center my-2">
+                                <img src="~/Content/Images/direction.png" style="height:1rem" class="dir-img" />
+
+                            </div>
+                            <p>@Model.Wind.Speed  m/s</p>
+                            <div class="d-flex flex-column flex-sm-row   degree-responsive">
+
+                                <p>  @Model.Wind.Deg &ThinSpace; </p>
+                                <p>degree</p>
+                            </div>
+
+
+
+                        </div>
+                        <div class=" d-flex flex-column  mt-auto">
+                            <div class="d-flex flex-md-row flex-sm-row">
+                                <p><b>Sunrise: </b></p>
+                                <p>
+                                    @Model.Sys.SunriseTime
+                                </p>
+                            </div>
+                            <div class="d-flex flex-md-row flex-sm-row">
+                                <p><b>Sunset: </b></p>
+                                <p> @Model.Sys.SunsetTime</p>
+                            </div>
+
 
                         </div>
                     </div>
-
-                    <div class="container bottom-bar mt-2 px-4 py-3">
-                        <div class="row align-Models-end ">
-                            <div class="col p-1 ">
-
-                                <div class="d-flex flex-md-row flex-sm-row">
-                                    <p><b>Pressure: </b></p>
-                                    <p> @(Model.Main.Pressure)Pa</p>
-
-                                </div>
-                                <div class="d-flex flex-md-row flex-sm-row">
-                                    <p><b>Humidity: </b> </p>
-                                    <p>@Model.Main.Humidity%</p>
-
-                                </div>
-                                <div class="d-flex flex-md-row flex-sm-row">
-                                    <p><b>Visibility: </b> </p>
-                                    <p>@(Model.Visibility)km</p>
-                                </div>
-
-
-                            </div>
-                            <div class="col justify-content-end d-flex flex-column flex-wrap align-Models-center ">
-                                <div class="d-flex  align-Models-center my-2">
-                                    <img src="~/Content/Images/direction.png" style="height:1rem" class="dir-img" />
-
-                                </div>
-                                <p>@Model.Wind.Speed  m/s</p>
-                                <div class="d-flex flex-column flex-sm-row   degree-responsive">
-
-                                    <p>  @Model.Wind.Deg &ThinSpace; </p>
-                                    <p>degree</p>
-                                </div>
-
-
-
-                            </div>
-                            <div class="col mt-auto">
-                                <div class="d-flex flex-md-row flex-sm-row">
-                                    <p><b>Sunrise: </b></p>
-                                    <p>
-                                        @Model.Sys.SunriseTime
-                                    </p>
-                                </div>
-                                <div class="d-flex flex-md-row flex-sm-row">
-                                    <p><b>Sunset: </b></p>
-                                    <p> @Model.Sys.SunsetTime</p>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
                 </div>
+
+
+
+
+
+
             </div>
+        </div>
 
 
 
-        
     </div>
 </div>
 

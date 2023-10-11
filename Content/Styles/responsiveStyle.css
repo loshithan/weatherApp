@@ -31,6 +31,9 @@ body {
     .temp-text {
         font-size: 193% !important;
     }
+    .svg-seperation{
+        display:none
+    }
 
 
 }
@@ -136,19 +139,20 @@ p {
     background-color: black;
     border-radius: 0 0 1rem 1rem;
 }
-/*footer {
+footer {
     position: fixed;
     height: 5rem;
     background-color: #2c2a2a;
     color: whitesmoke;
     bottom: 0;
     width: -webkit-fill-available;
-    text-align: center;*/
+    text-align: center;
     /* top: 0; */
     /* bottom: 0; */
-    /*text-align: -webkit-center;
+    text-align: -webkit-center;
     padding: 2rem;
-}*/
+    margin-top:2rem;
+}
 .blue {
     background-color: #388ee7 !important;
 }
@@ -173,10 +177,14 @@ body{
 }
 footer {
     background-color: #2c2a2a;
+    bottom:0;
 }
 
-.detail-parent-container {
+/*.detail-parent-container {
     max-width: 950px;
     margin-left: auto;
     margin-right: auto;
+}*/
+.super-container{
+    margin-bottom:6rem;
 }

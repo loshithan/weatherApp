@@ -3,91 +3,221 @@
 @{
     ViewBag.Title = "GetDetail";
 }
-<div style="display: inline-flex; width: 25rem; position: relative; left: 38%; ">
-    <div style=" flex: 1; padding: auto; position: relative;">
-        <img style="height: 4rem; position: absolute; top: 1rem;" src="~/Content/Images/cld_icon.png" />
-
-    </div>
-    <h2 style="text-align:center;color:white;flex:3">Weather App</h2>
+<div class="d-flex flex-row justify-content-center mt-5">
+    <img src="~/Content/Images/cld_icon.png" style="height: 1.5rem;">
+    <p class="p-2"><b>Weather App</b></p>
 </div>
 
-<div class="top-container detail-top-container">
+<!--method returns color of card container according to weather description-->
+@functions{
+    public string GetColor(string weather)
+    {
+        string color = "blue"; 
 
-    <!--check if the model passes from getdetail method null-->
-    @if(Model is null)
-            {
-                <button class="btn-primary btn-lg" onclick="window.location.href ='@Url.Action("GetData", "Weather")'">Go To Home</button>
-            }  
-    else { 
-<div class=" card-container detail-card-container">
-    <button onclick="window.location.href ='@Url.Action("GetData", "Weather")'">
-        <i class="fa-solid fa-arrow-left icon" style="color: #000000;"></i>
-    </button>
-    <div class=" header-text-wrap detail-header-text-wrap">
-        <div class="" style="text-align:center">
-            @Model.Name,@Model.Sys.Country
-            <div class="datetime-container detail-datetime-container">
-                @Model.LastUpdatedTime
+        if (weather == "overcast clouds")
+        {
+            color = "orange";
+        }
+        else if (weather == "broken clouds")
+        {
+            color = "purple";
+        }
+        else if (weather == "clear sky")
+        {
+            color = "green";
+        }
+        else if (weather == "fog")
+        {
+            color = "grey";
+        }
+        else if (weather == "few clouds")
+        {
+            color = "blue";
+        }
+        else if (weather == "Light rain")
+        {
+            color = "yellow";
+        }
+        else if (weather == "mist")
+        {
+            color = "red";
+        }
+        else
+        {
+            color = "brown";
+        }
 
-            </div>
-        </div>
+        return color;
+    }
+    //method returns img file path according to weather description
 
-    </div>
-    <div class="detail-weather-container">
-        <div class="detail-cloud">
-            <div class="detail-cloud-item">
-                <img src="~/Content/Images/cloud2.png" />
-            </div>
-            <div class="detail-cloud-item">
-                <b> @Model.Weather[0].Description</b>
+    public string GetIcon(string weather)
+    {
+        string imgSrc = "few_clouds.png"; 
 
-            </div>
-        </div>
-        <div class="vertical-line"></div>
+        if (weather == "overcast clouds")
+        {
+            imgSrc = "clear_sky.png"; 
+        }
+        else if (weather == "broken clouds")
+        {
+            imgSrc = "broken_cloud.png"; 
+        }
+        else if (weather == "clear sky")
+        {
+            imgSrc = "clear_sky.png"; 
+        }
+        else if (weather == "fog")
+        {
+            imgSrc = "mist.png"; 
+        }
+        else if (weather == "few clouds")
+        {
+            imgSrc = "few_clouds.png"; 
+        }
+        else if (weather == "Light rain")
+        {
+            imgSrc = "rain.png"; 
+        }
+        else if (weather == "mist")
+        {
+            imgSrc = "mist.png";
+        }
+        else
+        {
+            imgSrc = "few_clouds.png"; 
+        }
 
-
-        <div class="detail-temp-wrapper col-lg-6">
-            <div class="detail-temp-lg">
-                @(Model.Main.Temp)°c
-
-            </div>
-            <div class="col-lg-6" style="display: flex; flex-direction: column; align-items: flex-start; width: auto;">
-                <div style="flex:1">
-                    <b> Temp Min:</b> @Model.Main.Temp_min°C
-                </div>
-                <div style="flex:1">
-                    <strong>Temp Max:</strong>   @Model.Main.Temp_max°C
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="bottom-bar detail-bottom-bar">
-        <div class="wind-details-container">
-            <p> <b>Pressure:</b> @(Model.Main.Pressure)hPa </p>
-            <p><b>Humidity:</b> @Model.Main.Humidity% </p>
-            <p><b>Visibility:</b> @(Model.Visibility)km </p>
-
-
-        </div>
-        <div class="vertical-line detail-bottombar-line1 "></div>
-        <div class="wind-direction-container" id="detail-speed">
-            <img src="~/Content/Images/direction.png" style="height:2rem" />
-            <p>@Model.Wind.Speed m/s @Model.Wind.Deg degree</p>
-
-        </div>
-        <div class="vertical-line detail-bottombar-line2"></div>
-
-        <div class="sun-detail-container">
-            <p><b>Sun Rise:</b> @Model.Sys.SunriseTime </p>
-            <p><b>Sun Set:</b> @Model.Sys.SunsetTime </p>
-
-        </div>
-
-    </div>
-
-</div>
+        return imgSrc;
     }
 
-    
+}
+
+
+
+
+<div class="container mb-5">
+
+    <div class="detail-parent-container row   mx-auto ">
+
+
+
+
+
+
+        <div class="col col-md-12 col-lg-12  p-3 ">
+            <div class=" card-container @(GetColor(Model.Weather[0].Description))    px-0 d-flex flex-md-column flex-sm-column" >
+                <div class="d-flex flex-md-row justify-content-evenly   my-2 mx-3 mt-4  ">
+                    <div class="  d-flex flex-column  justify-content-end align-items-center">
+                        <h2><b>@Model.Name,@Model.Sys.Country</b></h2>
+                        <div class=" px-5">
+                            @Model.LastUpdatedTime
+
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-md-row justify-content-center my-lg-5  my-2 mx-3 ">
+                    <div class="d-flex">
+                        <div class="d-flex flex-column   align-items-center justify-content-center me-3  gap-3">
+                            <img src="~/Content/Images/@(GetIcon(Model.Weather[0].Description))" />
+                            <p> <b>  @Model.Weather[0].Description </b></p>
+
+                        </div>
+
+
+                    </div>
+                    <svg width="18" height="100">
+                        <line x1="9" y1="10" x2="9" y2="100"
+                              style="stroke: rgb(236, 224, 224); stroke-width: 5;stroke-opacity:0.7" />
+                    </svg>
+                    <div class=" d-flex flex-column align-items-center ms-2 ">
+                        <div class=" temp-text">
+                            @Model.Main.Temp°c
+                        </div>
+                        <div class="d-flex flex-md-row flex-sm-row">
+                            <p> <b> Temp Min: </b> </p>
+                            <p>@Model.Main.Temp_min°c</p>
+                        </div>
+                        <div class="d-flex flex-md-row flex-sm-row">
+                            <p> <b> Temp Max: </b> </p>
+                            <p>@Model.Main.Temp_max°c</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="container bottom-bar mt-auto px-4 py-3">
+                    <div class="d-flex justify-content-evenly flex-row align-items-end ">
+                        <div class=" p-1 ">
+
+                            <div class="d-flex flex-md-row flex-sm-row">
+                                <p><b>Pressure: </b></p>
+                                <p> @(Model.Main.Pressure)Pa</p>
+
+                            </div>
+                            <div class="d-flex flex-md-row flex-sm-row">
+                                <p><b>Humidity: </b> </p>
+                                <p>@Model.Main.Humidity%</p>
+
+                            </div>
+                            <div class="d-flex flex-md-row flex-sm-row">
+                                <p><b>Visibility: </b> </p>
+                                <p>@(Model.Visibility)km</p>
+                            </div>
+
+
+                        </div>
+                        <svg width="18" height="100" class="svg-seperation">
+                            <line x1="9" y1="10" x2="9" y2="85"
+                                  style="stroke: rgb(236, 224, 224); stroke-width: 3;stroke-opacity:0.7" />
+                        </svg>
+                        <div class="  my-auto d-flex flex-column flex-wrap align-items-center ">
+                            <div class="d-flex  align-items-center my-2">
+                                <img src="~/Content/Images/direction.png" style="height:1rem" class="dir-img" />
+
+                            </div>
+                            <p>@(Model.Wind.Speed)m/s</p>
+                            <div class="d-flex flex-column flex-sm-row   degree-responsive">
+
+                                <p>  @Model.Wind.Deg &ThinSpace; </p>
+                                <p>degree</p>
+                            </div>
+
+
+
+                        </div>
+                        <svg width="18" height="100" class="svg-seperation">
+                            <line x1="9" y1="10" x2="9" y2="85"
+                                  style="stroke: rgb(236, 224, 224); stroke-width: 3;stroke-opacity:0.7" />
+                        </svg>
+                        <div class=" d-flex flex-column  mt-auto">
+                            <div class="d-flex flex-md-row flex-sm-row">
+                                <p><b>Sunrise: </b></p>
+                                <p>
+                                    @Model.Sys.SunriseTime
+                                </p>
+                            </div>
+                            <div class="d-flex flex-md-row flex-sm-row">
+                                <p><b>Sunset: </b></p>
+                                <p> @Model.Sys.SunsetTime</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+
+
+
+    </div>
 </div>
+
+

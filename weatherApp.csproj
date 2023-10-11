@@ -185,6 +185,11 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\WeatherController.cs" />
+    <Compile Include="CustomException\ApiException.cs" />
+    <Compile Include="DAL\ApiHelper.cs" />
+    <Compile Include="DAL\CacheServices.cs" />
+    <Compile Include="DAL\Constants.cs" />
+    <Compile Include="DAL\DataAccessLayer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -210,6 +215,7 @@
     <Content Include="Content\Images\mist.png" />
     <Content Include="Content\Images\rain.png" />
     <Content Include="Content\Js\weather.js" />
+    <Content Include="Content\Styles\responsiveStyle.css" />
     <Content Include="Content\Styles\styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -245,8 +251,15 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Weather\GetData.cshtml" />
     <Content Include="Views\Weather\GetDetail.cshtml" />
-    <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\UnAuthorized.cshtml" />
+    <Content Include="Views\Error\ForbiddenError.cshtml" />
+    <Content Include="Views\Error\BadRequest.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Error\UnknownError.cshtml" />
+    <Content Include="Views\Error\SerializationError.cshtml" />
+    <Content Include="Views\Error\Timeout.cshtml" />
+    <Content Include="Views\Shared\ButtonPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

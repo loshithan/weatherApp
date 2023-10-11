@@ -11,16 +11,39 @@ namespace weatherApp.Controllers
 
         public ActionResult NotFound()
         {
-            Response.StatusCode = 404;
-            return View();
-        }
-
-        public ActionResult InternalServerError()
-        {
-            Response.StatusCode = 500;
             return View();
         }
 
         
+        public ActionResult UnAuthorized()
+        {
+            return View();
+        }
+        public ActionResult ForbiddenError()
+        {
+            return View();
+        }
+        public ActionResult BadRequest()
+        {
+            return View();
+        }
+        public ActionResult ServerError()
+        {
+            return View();
+        }
+        public ActionResult UnknownError()
+        {
+            return View();
+        }
+        public ActionResult SerializationError()
+        {
+            return View();
+        }
+        public ActionResult Timeout()
+        {
+            return View();
+        }
+
+
     }
 }

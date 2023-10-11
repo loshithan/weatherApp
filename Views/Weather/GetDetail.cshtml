@@ -12,7 +12,7 @@
 @functions{
     public string GetColor(string weather)
     {
-        string color = "blue"; // Default color (you can set it to any color you prefer)
+        string color = "blue"; 
 
         if (weather == "overcast clouds")
         {
@@ -49,43 +49,43 @@
 
         return color;
     }
-    //method returns imd file path according to weather description
+    //method returns img file path according to weather description
 
     public string GetIcon(string weather)
     {
-        string imgSrc = "few_clouds.png"; // Default image source
+        string imgSrc = "few_clouds.png"; 
 
         if (weather == "overcast clouds")
         {
-            imgSrc = "clear_sky.png"; // Replace with the actual image source for 'orange'
+            imgSrc = "clear_sky.png"; 
         }
         else if (weather == "broken clouds")
         {
-            imgSrc = "broken_cloud.png"; // Replace with the actual image source for 'orange'
+            imgSrc = "broken_cloud.png"; 
         }
         else if (weather == "clear sky")
         {
-            imgSrc = "clear_sky.png"; // Replace with the actual image source for 'orange'
+            imgSrc = "clear_sky.png"; 
         }
         else if (weather == "fog")
         {
-            imgSrc = "mist.png"; // Replace with the actual image source for 'orange'
+            imgSrc = "mist.png"; 
         }
         else if (weather == "few clouds")
         {
-            imgSrc = "few_clouds.png"; // Replace with the actual image source for 'orange'
+            imgSrc = "few_clouds.png"; 
         }
         else if (weather == "Light rain")
         {
-            imgSrc = "rain.png"; // Replace with the actual image source for 'orange'
+            imgSrc = "rain.png"; 
         }
         else if (weather == "mist")
         {
-            imgSrc = "mist.png"; // Replace with the actual image source for 'orange'
+            imgSrc = "mist.png";
         }
         else
         {
-            imgSrc = "few_clouds.png"; // Replace with the actual image source for 'orange'
+            imgSrc = "few_clouds.png"; 
         }
 
         return imgSrc;
@@ -95,9 +95,7 @@
 
 
 
-@*<div class="top-container row">
 
-*@
 <div class="container mb-5">
 
     <div class="detail-parent-container row   mx-auto ">
@@ -108,7 +106,7 @@
 
 
         <div class="col col-md-12 col-lg-12  p-3 ">
-            <div class=" card-container @(GetColor(Model.Weather[0].Description))    px-0 d-flex flex-md-column flex-sm-column" onclick="window.location.href ='@Url.Action("GetDetail", "Weather", new { code = Model.Id })'">
+            <div class=" card-container @(GetColor(Model.Weather[0].Description))    px-0 d-flex flex-md-column flex-sm-column" >
                 <div class="d-flex flex-md-row justify-content-evenly   my-2 mx-3 mt-4  ">
                     <div class="  d-flex flex-column  justify-content-end align-items-center">
                         <h2><b>@Model.Name,@Model.Sys.Country</b></h2>
@@ -126,7 +124,6 @@
 
                         </div>
 
-                        <!--add the returning img file path to src attribute-->
 
                     </div>
                     <svg width="18" height="100">

@@ -9,7 +9,7 @@ using System.Globalization;
 using System.Runtime.Caching;
 using weatherApp.Models;
 using System.Threading.Tasks;
-
+using weatherApp.CustomException;
 
 namespace weatherApp.DAL
 {
@@ -22,11 +22,15 @@ namespace weatherApp.DAL
 
         public DataAccessLayer()
         {
+            //instantiate apihelper
             _apiHelper = new ApiHelper();
+
+            //instantiate cacheservice 
             _cacheServices = new CacheServices();
         }
 
-        public  async Task<List<WeatherDetail>> GetWeatherData()
+        //get weather data returns list of weather detail obj or exception string
+        public  async Task<object> GetWeatherData()
         {
             try
             {
@@ -40,16 +44,26 @@ namespace weatherApp.DAL
 
 
                 string cityId = string.Join(",", cityCodes);
+
+                //derive api key using api helper
                 string apiKey = _apiHelper.ApiKey;
 
+                //integrate api endpoint 
                 string endpoint = $"group?id={cityId}&units=metric&appid={apiKey}";
 
                 
 
-
+                //check if weatherdata key available
                 if (_cacheServices.Get<List<WeatherDetail>>("WeatherData") is null)
                 {
+
+                    //call getasync method in apihelper class
+                    //returns json data or throw exception
                     string jData = await _apiHelper.GetAsync(endpoint);
+
+                    
+
+                    
 
 
                     WeatherJson jsonList = JsonConvert.DeserializeObject<WeatherJson>(jData);
@@ -73,12 +87,13 @@ namespace weatherApp.DAL
                         weatherDetail.LastUpdatedTime = $"{date:h:mmtt},{shortMonth} {date.Day}";
 
                     }
+
                     _cacheServices.Set("WeatherData", list, DateTimeOffset.Now.AddMinutes(5));
 
 
                 }
 
-                              
+                          //retrieve weatherdata values    
 
                 weatherList = _cacheServices.Get<List<WeatherDetail>>("WeatherData");
 
@@ -88,11 +103,38 @@ namespace weatherApp.DAL
                 return weatherList;
 
             }
-            catch (Exception ex)
+            catch (ApiException ex)
             {
-                // Handle exceptions (e.g., HTTP request or JSON deserialization errors)
-                throw ex;
-                return null;
+                // Handle api exceptions 
+                if (ex.StatusCode == 404)
+                {
+                    return "NotFound";
+                }
+                else if (ex.StatusCode == 401)
+                {
+                    return "Unauthorized";
+                }
+                else if(ex.StatusCode == 403)
+                {
+                    return "Forbidden";
+                }
+                else if(ex.StatusCode == 400)
+                {
+                    return "BadRequest";
+                }
+                else if (ex.StatusCode == 500)
+                {
+                    return "ServerError";
+                }
+                else
+                {
+                    return "UnknownError";
+                }
+            }
+            catch(JsonSerializationException)
+            {
+                //handle any form of serialization exceptions
+                throw new Exception("SerializationError");
             }
         }
 

@@ -18,12 +18,11 @@ namespace weatherApp.Controllers
     public class WeatherController : Controller
     {
 
-        //declare weatherlist to store results from webapi
-        List<WeatherDetail> weatherList;
-        DataAccessLayer dal;
+        readonly DataAccessLayer dal;
 
         public WeatherController()
         {
+            //instantiate data access layer
             dal = new DataAccessLayer();
         }
 
@@ -34,24 +33,40 @@ namespace weatherApp.Controllers
         //action method to get data to home page
         public  async Task<ActionResult> GetData ()
         {
-           
+            var data = await dal.GetWeatherData();
 
-           
+            if (data is List<WeatherDetail>)
+            {
+                return View("GetData",data);
+            }
+            else if (data is string)
+            {
+                  string result = (string)data;
 
-            return View(await dal.GetWeatherData());
+                return RedirectToAction(result, "Error");   
+            }
+
+
+
+
+
+            return View("Error");
         }
 
         // Action method to retrieve weather detail for a specific city.
 
         public async Task<ActionResult> GetDetail(int? code)
         {
-           
+            WeatherDetail wd = dal.GetWeaterDetail(code);
+            if (wd == null)
+            {
+                return RedirectToAction("Timeout", "Error");
+            }
 
-            return View(dal.GetWeaterDetail(code));
+            return View(wd);
 
 
         }
-        // Method to read city details from a JSON file.
 
         
     }

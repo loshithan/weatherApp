@@ -4,23 +4,27 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using weatherApp.DAL;
 using Newtonsoft.Json;
-
-
+using System.Net;
+using weatherApp.CustomException;
 
 namespace weatherApp.DAL
 {
     public class ApiHelper
     {
-        
+
         private readonly HttpClient _httpClient;
         private readonly string _baseApiUrl;
         private readonly string _apiKey;
 
         public ApiHelper()
         {
+            //retrieve apikey from webconfig file 
             _apiKey = ConfigurationManager.AppSettings["ApiKey"];
 
+            //retrive baseurl from constants file
             _baseApiUrl = Constants.BaseUrl;
+
+            //instantiate httpclient
             _httpClient = new HttpClient();
         }
 
@@ -33,24 +37,31 @@ namespace weatherApp.DAL
             try
             {
                 var response = await _httpClient.GetAsync(apiUrl);
+               
 
+                //if success code 200 return json result
                 if (response.IsSuccessStatusCode)
                 {
                     string json = await response.Content.ReadAsStringAsync();
                     return json;
                 }
-                else
+                
+                else 
                 {
-                    // Handle non-success status codes here
-                    return null;
+                    //throw custom exception for status code except 200
+                    throw new ApiException((int)response.StatusCode, await response.Content.ReadAsStringAsync());
                 }
+
             }
-            catch (HttpRequestException)
+            //catch above thrown 
+            catch (HttpRequestException ex)
             {
                 // Handle HTTP request exceptions here
-                return null;
-            }
-        }
+                throw new ApiException(500,ex.Message);
+/*                return ex.Message;
+*/            }
+        } 
+    
     
 
     }

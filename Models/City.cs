@@ -11,5 +11,7 @@ namespace weatherApp.Models
         public string CityName { get; set; }
         public string Temp { get; set; }
         public string Status { get; set; }
+
+        
     }
 }

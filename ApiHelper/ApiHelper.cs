@@ -6,17 +6,18 @@ using weatherApp.DAL;
 using Newtonsoft.Json;
 using System.Net;
 using weatherApp.CustomException;
+using System.Web.Mvc;
 
 namespace weatherApp.DAL
 {
-    public class ApiHelper
+    public class ApiHelper:IApiHelper
     {
 
         private readonly HttpClient _httpClient;
         private readonly string _baseApiUrl;
         private readonly string _apiKey;
 
-        public ApiHelper()
+        public ApiHelper(HttpClient httpClient)
         {
             //retrieve apikey from webconfig file 
             _apiKey = ConfigurationManager.AppSettings["ApiKey"];
@@ -25,10 +26,11 @@ namespace weatherApp.DAL
             _baseApiUrl = Constants.BaseUrl;
 
             //instantiate httpclient
-            _httpClient = new HttpClient();
+            _httpClient = httpClient;
         }
 
         public string ApiKey { get { return _apiKey; } }
+
 
         public async Task<string> GetAsync(string endpoint)
         {

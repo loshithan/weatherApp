@@ -11,29 +11,33 @@ using Newtonsoft.Json;
 using System.Globalization;
 using System.Runtime.Caching;
 using weatherApp.DAL;
-
+using System.Web.UI;
 
 namespace weatherApp.Controllers
 {
     public class WeatherController : Controller
     {
 
-        readonly DataAccessLayer dal;
+        readonly IDataAccessLayer _dal;
 
-        public WeatherController()
+        public WeatherController(IDataAccessLayer dal)
         {
             //instantiate data access layer
-            dal = new DataAccessLayer();
+            _dal = dal;
         }
+       
 
 
 
 
         // GET: Weather
         //action method to get data to home page
+
+        //caching for 5mins stored in both server and client
+        [OutputCache(Duration =60,Location = OutputCacheLocation.ServerAndClient)]
         public  async Task<ActionResult> GetData ()
         {
-            var data = await dal.GetWeatherData();
+            var data = await _dal.GetWeatherData();
 
             if (data is List<WeatherDetail>)
             {
@@ -55,9 +59,10 @@ namespace weatherApp.Controllers
 
         // Action method to retrieve weather detail for a specific city.
 
-        public async Task<ActionResult> GetDetail(int? code)
+
+        public  ActionResult GetDetail(int? code)
         {
-            WeatherDetail wd = dal.GetWeaterDetail(code);
+            WeatherDetail wd = _dal.GetWeatherDetailAsync(code);
             if (wd == null)
             {
                 return RedirectToAction("Timeout", "Error");

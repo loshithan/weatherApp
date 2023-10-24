@@ -10,27 +10,29 @@ using System.Runtime.Caching;
 using weatherApp.Models;
 using System.Threading.Tasks;
 using weatherApp.CustomException;
+using System.Web.Mvc;
+
 
 namespace weatherApp.DAL
 {
-    public class DataAccessLayer
+    public class DataAccessLayer:IDataAccessLayer
     {
-        private readonly ApiHelper _apiHelper;
-        private readonly CacheServices _cacheServices;
-        List<WeatherDetail> weatherList;
+        private readonly IApiHelper _apiHelper;
+        private List<WeatherDetail> weatherList;
 
 
-        public DataAccessLayer()
+        public DataAccessLayer(IApiHelper apiHelper)
         {
             //instantiate apihelper
-            _apiHelper = new ApiHelper();
+            _apiHelper = apiHelper;
 
-            //instantiate cacheservice 
-            _cacheServices = new CacheServices();
+            
         }
 
         //get weather data returns list of weather detail obj or exception string
-        public  async Task<object> GetWeatherData()
+
+
+        public async Task<object> GetWeatherData()
         {
             try
             {
@@ -51,53 +53,44 @@ namespace weatherApp.DAL
                 //integrate api endpoint 
                 string endpoint = $"group?id={cityId}&units=metric&appid={apiKey}";
 
+
+
                 
 
-                //check if weatherdata key available
-                if (_cacheServices.Get<List<WeatherDetail>>("WeatherData") is null)
+                //call getasync method in apihelper class
+                //returns json data or throw exception
+                string jData = await _apiHelper.GetAsync(endpoint);
+
+
+
+
+
+
+                WeatherJson jsonList = JsonConvert.DeserializeObject<WeatherJson>(jData);
+                 weatherList = jsonList.List;
+                CultureInfo cultureInfo = new CultureInfo("en-US");
+
+                foreach (WeatherDetail weatherDetail in weatherList)
                 {
+                    //change the unix timestamp from weatherdetail to readable time
+                    weatherDetail.Sys.SunriseTime = DateTimeOffset.FromUnixTimeSeconds(weatherDetail.Sys.Sunrise).ToString("h:mmtt");
+                    weatherDetail.Sys.SunsetTime = DateTimeOffset.FromUnixTimeSeconds(weatherDetail.Sys.Sunset).ToString("h:mmtt");
 
-                    //call getasync method in apihelper class
-                    //returns json data or throw exception
-                    string jData = await _apiHelper.GetAsync(endpoint);
+                    //extract full month name from each weather detail
+                    string fullMonthName = DateTimeOffset.FromUnixTimeSeconds(weatherDetail.LastUpdatedTimeUnix).DateTime.ToString("MMMM", cultureInfo);
 
-                    
+                    //shorten month name
+                    string shortMonth = fullMonthName.Substring(0, 3);
+                    DateTime date = DateTimeOffset.FromUnixTimeSeconds(weatherDetail.LastUpdatedTimeUnix).DateTime;
 
-                    
-
-
-                    WeatherJson jsonList = JsonConvert.DeserializeObject<WeatherJson>(jData);
-                    List<WeatherDetail> list = jsonList.List;
-                    CultureInfo cultureInfo = new CultureInfo("en-US");
-
-                    foreach (WeatherDetail weatherDetail in list)
-                    {
-                        //change the unix timestamp from weatherdetail to readable time
-                        weatherDetail.Sys.SunriseTime = DateTimeOffset.FromUnixTimeSeconds(weatherDetail.Sys.Sunrise).ToString("h:mmtt");
-                        weatherDetail.Sys.SunsetTime = DateTimeOffset.FromUnixTimeSeconds(weatherDetail.Sys.Sunset).ToString("h:mmtt");
-
-                        //extract full month name from each weather detail
-                        string fullMonthName = DateTimeOffset.FromUnixTimeSeconds(weatherDetail.LastUpdatedTimeUnix).DateTime.ToString("MMMM", cultureInfo);
-
-                        //shorten month name
-                        string shortMonth = fullMonthName.Substring(0, 3);
-                        DateTime date = DateTimeOffset.FromUnixTimeSeconds(weatherDetail.LastUpdatedTimeUnix).DateTime;
-
-                        //assign formatted datetime string to instance variable
-                        weatherDetail.LastUpdatedTime = $"{date:h:mmtt},{shortMonth} {date.Day}";
-
-                    }
-
-                    _cacheServices.Set("WeatherData", list, DateTimeOffset.Now.AddMinutes(5));
-
+                    //assign formatted datetime string to instance variable
+                    weatherDetail.LastUpdatedTime = $"{date:h:mmtt},{shortMonth} {date.Day}";
 
                 }
 
-                          //retrieve weatherdata values    
+               // set caching key and duration for weather list
+                HttpContext.Current.Cache.Insert("weatherlist", weatherList, null, DateTime.Now.AddMinutes(1), TimeSpan.Zero);
 
-                weatherList = _cacheServices.Get<List<WeatherDetail>>("WeatherData");
-
-                              
                 
 
                 return weatherList;
@@ -158,19 +151,40 @@ namespace weatherApp.DAL
 
         }
 
-        public WeatherDetail GetWeaterDetail(int? code)
+
+        public  WeatherDetail GetWeatherDetailAsync(int? code)
         {
-            WeatherDetail weatherDetail = null;
-            if (_cacheServices.Get<List<WeatherDetail>>("WeatherData") != null && code != null)
+            //retrieve from cached storage
+            List<WeatherDetail> list = (List<WeatherDetail>)HttpContext.Current.Cache["weatherlist"];
+
+            if(list is null)
             {
-                List<WeatherDetail> list =  _cacheServices.Get<List<WeatherDetail>>("WeatherData");
-                weatherDetail = list.FirstOrDefault(weather => weather.Id == code);
+                return null;
 
             }
+            else
+            {
+                WeatherDetail weatherDetail = list.FirstOrDefault(wd => wd.Id == code);
+                return weatherDetail;
 
-            return weatherDetail;
+            }
+           
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         }
+
+       
     }
 }

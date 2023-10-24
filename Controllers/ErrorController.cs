@@ -11,6 +11,7 @@ namespace weatherApp.Controllers
 
         public ActionResult NotFound()
         {
+            
             return View();
         }
 

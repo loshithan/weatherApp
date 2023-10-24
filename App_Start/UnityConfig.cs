@@ -1,6 +1,7 @@
 using System.Web.Mvc;
 using Unity;
 using Unity.Mvc5;
+using weatherApp.CacheProvider;
 using weatherApp.DAL;
 
 namespace weatherApp
@@ -20,6 +21,7 @@ namespace weatherApp
             container.RegisterType<IDataAccessLayer, DataAccessLayer>();                       
             container.RegisterType<IApiHelper, ApiHelper>();
             container.RegisterType<System.Net.Http.HttpClient>();
+            container.RegisterType<ICacheService, CacheService>();
 
 
 

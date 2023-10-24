@@ -18,13 +18,16 @@ namespace weatherApp.DAL
     public class DataAccessLayer:IDataAccessLayer
     {
         private readonly IApiHelper _apiHelper;
+        private readonly ICacheService _cacheService;
+
         private List<WeatherDetail> weatherList;
 
 
-        public DataAccessLayer(IApiHelper apiHelper)
+        public DataAccessLayer(IApiHelper apiHelper,ICacheService cacheService)
         {
             //instantiate apihelper
             _apiHelper = apiHelper;
+            _cacheService = cacheService;
 
             
         }
@@ -88,9 +91,9 @@ namespace weatherApp.DAL
 
                 }
 
-               // set caching key and duration for weather list
-                HttpContext.Current.Cache.Insert("weatherlist", weatherList, null, DateTime.Now.AddMinutes(1), TimeSpan.Zero);
-
+                // set caching key and duration for weather list
+               
+                _cacheService.Insert("weatherlist", weatherList, DateTime.Now.AddMinutes(5));
                 
 
                 return weatherList;

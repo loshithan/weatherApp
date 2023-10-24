@@ -34,7 +34,7 @@ namespace weatherApp.Controllers
         //action method to get data to home page
 
         //caching for 5mins stored in both server and client
-        [OutputCache(Duration =60,Location = OutputCacheLocation.ServerAndClient)]
+        [OutputCache(Duration =300,Location = OutputCacheLocation.ServerAndClient)]
         public  async Task<ActionResult> GetData ()
         {
             var data = await _dal.GetWeatherData();

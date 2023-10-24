@@ -192,6 +192,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="CacheProvider\CacheService.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\WeatherController.cs" />
     <Compile Include="CustomException\ApiException.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="CacheProvider\ICacheService.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\CityList.cs" />
     <Compile Include="Models\WeatherDetail.cs" />
